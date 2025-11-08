@@ -7,16 +7,12 @@ const listingSchema = new Schema ({
         required:true,
     },
     description:String,
-    image: {
-  filename: {
-    type: String,
-    default: "listingimage",
-  },
-  url: {
-    type: String,
-    default: "https://unsplash.com/photos/surfer-carries-board-on-head-as-sun-sets-t2AP9JEIm0k",
-  }
+ image: {
+    url:String,
+    filename:String,
 },
+
+
     
     price:Number,
     location:String,
@@ -25,9 +21,13 @@ const listingSchema = new Schema ({
       {
         type:Schema.Types.ObjectId,
         ref:"Review",
-      }
-    ]
-})
+      },
+    ],
+    owner : {
+      type : Schema.Types.ObjectId,
+      ref : "User",
+    },
+});
 
 listingSchema.post("findOneAndDelete",async (listing) => { 
   if(listing) {
